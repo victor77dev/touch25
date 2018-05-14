@@ -9,6 +9,7 @@ const styles = {
     marginRight: 'auto',
     marginLeft: 'auto',
     position: 'relative',
+    top: 70,
   },
 }
 
@@ -19,7 +20,7 @@ export default class Game extends React.Component {
     let records = [100, 10, 30, 40, 50, 70];
     return (
       <div>
-        <Menu buttons={menuButtons}/>
+        <Menu buttons={menuButtons} size={boardSize}/>
         <Grid container justify='center' style={styles.game}>
           <GameBoard size={boardSize}/>
           <Record records={records}/>

@@ -1,22 +1,80 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-function addButtons(list) {
-  let buttonList =  [];
-  for (let button of list) {
-    if (button === 'Reset') {
-      buttonList.push(<div key='Reset'>This is Reset</div>);
+const styles = {
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  menu: {
+    top: 38,
+  },
+};
+
+
+export class GameMenu extends React.PureComponent {
+  state = {
+    anchorEl: null,
+  };
+
+  handleMenuClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleMenuClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  gameReset = () => {
+    this.handleMenuClose();
+    console.log('game reset');
+  };
+
+  addButtons = (list) => {
+    let buttonList =  [];
+    for (let button of list) {
+      if (button === 'Reset') {
+        buttonList.push(<MenuItem key='Reset' onClick={this.gameReset}>Reset</MenuItem>);
+      }
     }
+    return buttonList;
   }
-  return buttonList;
-}
-
-export default class Menu extends React.PureComponent {
   render() {
+    const { anchorEl } = this.state;
+    const { classes, size, buttons } = this.props;
     return (
-      <div>
-        This is Menu
-        {addButtons(this.props.buttons)}
-      </div>
+      <AppBar>
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon onClick={this.handleMenuClick}/>
+            <Menu 
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={this.handleMenuClose}
+              className={classes.menu}
+            >
+              {this.addButtons(buttons)}
+            </Menu>
+          </IconButton>
+          <Typography variant="title" color="inherit">
+            Touch {size*size}
+          </Typography>
+        </Toolbar>
+      </AppBar>
     );
   }
 }
+
+GameMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(GameMenu);
