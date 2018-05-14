@@ -15,9 +15,8 @@ function genBoardStyle(size) {
       maxHeight: maxSize + size,
       minWidth: minSize,
       minHeight: minSize,
-      marginRight: 'auto',
-      marginLeft: 'auto',
       position: 'relative',
+      display: 'inline-block',
     },
   };
   return styles;
