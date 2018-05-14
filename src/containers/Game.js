@@ -10,7 +10,7 @@ export default class Game extends React.Component {
       <div>
         <Menu buttons={menuButtons}/>
         <Record />
-        <GameBoard />
+        <GameBoard size={5}/>
       </div>
     );
   }
