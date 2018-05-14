@@ -3,6 +3,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
 import Block from './Block';
+import StartButton from './StartButton';
 
 const maxSize = 500;
 const minSize = 240;
@@ -16,6 +17,7 @@ function genBoardStyle(size) {
       minHeight: minSize,
       marginRight: 'auto',
       marginLeft: 'auto',
+      position: 'relative',
     },
   };
   return styles;
@@ -47,6 +49,7 @@ export default class Board extends React.PureComponent {
     const blockSize = Math.max(Math.min(width, height, maxSize), minSize) / size;
     return (
       <Grid container justify='center' style={genBoardStyle(size).board}>
+        <StartButton />
         <GridList
           cols={size}
           spacing={1}
