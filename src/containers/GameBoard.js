@@ -15,10 +15,7 @@ function randomValues(size) {
 export default class GameBoard extends React.PureComponent {
   render() {
     return (
-      <div>
-        This is GameBoard 
-        <Board values={randomValues(this.props.size)} size={this.props.size}/>
-      </div>
+      <Board values={randomValues(this.props.size)} size={this.props.size}/>
     );
   }
 }
