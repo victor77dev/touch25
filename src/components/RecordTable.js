@@ -60,7 +60,7 @@ const Best = (records) => {
     <Table style={styles.table}>
       <TableBody>
         <TableRow key='Best'>
-          <TableCell>Bset of latest games</TableCell>
+          <TableCell>Best of latest games</TableCell>
           <TableCell>{best}</TableCell>
         </TableRow>
       </TableBody>
