@@ -1,25 +1,27 @@
 import React from 'react';
 import Board from '../components/Board';
 import StopWatch from '../components/StopWatch';
+import { connect } from  'react-redux';
 
-function randomValues(size) {
-  let values = Array.from({length: size * size}, (v, k) => k + 1);;
-
-  // Do random shuffle
-  for (let i = values.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [values[i], values[j]] = [values[j], values[i]];
+const mapStateToProps = (state) => {
+  return {
+    values: state.game.values,
   }
-  return values;
 }
 
-export default class GameBoard extends React.PureComponent {
+const mapDispatchToProps = dispatch => ({
+});
+
+export class GameBoard extends React.PureComponent {
   render() {
+    let { values } = this.props;
     return (
       <div>
         <StopWatch />
-        <Board values={randomValues(this.props.size)} size={this.props.size}/>
+        <Board values={values} size={this.props.size}/>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameBoard);

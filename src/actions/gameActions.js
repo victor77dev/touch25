@@ -20,10 +20,13 @@ export function startCountDown() {
   };
 }
 
+// Random values generated in startGame()
+let values;
 export function endCountDown() {
   clearInterval(gameCountDown);
   return {
-    type: 'COUNTDOWN_END'
+    type: 'COUNTDOWN_END',
+    payload: values,
   };
 }
 
@@ -57,15 +60,28 @@ export function endStopWatch() {
   clearInterval(gameStopWatch);
 }
 
+function randomValues(size) {
+  let values = Array.from({length: size * size}, (v, k) => k + 1);;
+
+  // Do random shuffle
+  for (let i = values.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [values[i], values[j]] = [values[j], values[i]];
+  }
+  return values;
+}
+
 export function startGame(size) {
   let blocks = {};
   for (let i = 0; i < size * size; i++) {
     let blockInfo = {clicked: false, completed: false};
     blocks[i + 1] = blockInfo;
   }
+  let defaultValues = Array.from({length: size * size}, (v, k) => k + 1);;
+  values = randomValues(size);
   return {
     type: 'GAME_START',
-    payload: blocks,
+    payload: {blocks: blocks, values: defaultValues},
   }
 }
 

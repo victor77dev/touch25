@@ -8,6 +8,7 @@ const initialState = {
   currentTime: 0,
   gameStarted: false,
   gameEnd: false,
+  values: [],
 };
 
 export default function reducer(state= initialState, action) {
@@ -32,6 +33,7 @@ export default function reducer(state= initialState, action) {
         start: {...state.start,
           countDown: 3,
         },
+        values: action.payload,
         gameStarted: true,
       };
     }
@@ -46,14 +48,13 @@ export default function reducer(state= initialState, action) {
       }
     }
     case 'GAME_START': {
-      console.log('start')
       return {...state,
-        blocks: action.payload,
+        blocks: action.payload.blocks,
+        values: action.payload.values,
         gameEnd: false,
       }
     }
     case 'GAME_END': {
-      console.log('end')
       return {...state,
         start: {...state.start,
           startButton: 'Restart',
