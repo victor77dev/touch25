@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from  'react-redux';
 import { startStopWatch } from '../actions/gameActions';
+import { formatTimeInMs } from '../lib'
 
 const styles = theme => ({
   timer: theme.mixins.gutters({
@@ -37,9 +38,7 @@ export class StopWatch extends React.PureComponent {
   render() {
     const { classes } = this.props;
     let { currentTime } = this.props;
-    let date = new Date(null);
-    date.setMilliseconds(currentTime);
-    let formatedTime = date.toISOString().substr(11, 12);
+    let formatedTime = formatTimeInMs(currentTime);
 
     return (
       <Paper className={classes.timer}>

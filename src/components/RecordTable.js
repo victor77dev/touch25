@@ -4,6 +4,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { formatTimeInMs } from '../lib'
 
 const styles = {
   table: {
@@ -25,7 +26,7 @@ const Latest = (records) => {
           return (
             <TableRow key={'Record'+index}>
               <TableCell>{index + 1}</TableCell>
-              <TableCell>{data}</TableCell>
+              <TableCell>{formatTimeInMs(data)}</TableCell>
             </TableRow>
           );
         })}
@@ -45,7 +46,7 @@ const Average = (records) => {
       <TableBody>
         <TableRow key='Average'>
           <TableCell>Average of latest games</TableCell>
-          <TableCell>{avg}</TableCell>
+          <TableCell>{formatTimeInMs(avg)}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -61,7 +62,7 @@ const Best = (records) => {
       <TableBody>
         <TableRow key='Best'>
           <TableCell>Best of latest games</TableCell>
-          <TableCell>{best}</TableCell>
+          <TableCell>{formatTimeInMs(best)}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
