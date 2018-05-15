@@ -4,6 +4,7 @@ const initialState = {
     startButton: 'Start',
     wait: true,
   },
+  currentTime: 0,
   gameStarted: false,
 };
 
@@ -30,6 +31,16 @@ export default function reducer(state= initialState, action) {
         },
         gameStarted: true,
       };
+    }
+    case 'STOPWATCH_START': {
+      return {...state,
+        currentTime: 0,
+      }
+    }
+    case 'STOPWATCH_UPDATE': {
+      return {...state,
+        currentTime: action.payload,
+      }
     }
     case 'GAME_END': {
       return {...state,

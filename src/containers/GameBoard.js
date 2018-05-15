@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from '../components/Board';
+import StopWatch from '../components/StopWatch';
 
 function randomValues(size) {
   let values = Array.from({length: size * size}, (v, k) => k + 1);;
@@ -15,7 +16,10 @@ function randomValues(size) {
 export default class GameBoard extends React.PureComponent {
   render() {
     return (
-      <Board values={randomValues(this.props.size)} size={this.props.size}/>
+      <div>
+        <StopWatch />
+        <Board values={randomValues(this.props.size)} size={this.props.size}/>
+      </div>
     );
   }
 }
