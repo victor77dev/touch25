@@ -4,8 +4,10 @@ const initialState = {
     startButton: 'Start',
     wait: true,
   },
+  blocks: {},
   currentTime: 0,
   gameStarted: false,
+  gameEnd: false,
 };
 
 export default function reducer(state= initialState, action) {
@@ -15,6 +17,7 @@ export default function reducer(state= initialState, action) {
         start: {...state.start,
           wait: false,
         },
+        currentTime: 0,
       };
     }
     case 'COUNTDOWN_REDUCE': {
@@ -42,17 +45,34 @@ export default function reducer(state= initialState, action) {
         currentTime: action.payload,
       }
     }
+    case 'GAME_START': {
+      console.log('start')
+      return {...state,
+        blocks: action.payload,
+        gameEnd: false,
+      }
+    }
     case 'GAME_END': {
+      console.log('end')
       return {...state,
         start: {...state.start,
           startButton: 'Restart',
           wait: true,
         },
         gameStarted: false,
+        gameEnd: true,
       };
     }
     case 'GAME_RESET': {
       return initialState;
+    }
+    case 'BLOCK_CLICK': {
+      let blockNo = action.payload;
+      return {...state,
+        blocks: {...state.blocks,
+          [blockNo]: {...state.blocks[blockNo], clicked: true},
+        }
+      }
     }
     default:
       // do nothing

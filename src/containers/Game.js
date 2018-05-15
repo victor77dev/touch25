@@ -2,6 +2,7 @@ import React from 'react';
 import Menu from '../containers/Menu';
 import Record from '../containers/Record';
 import GameBoard from '../containers/GameBoard';
+import GameModel from '../containers/GameModel';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
@@ -21,6 +22,7 @@ export default class Game extends React.Component {
     return (
       <div>
         <Menu buttons={menuButtons} size={boardSize}/>
+        <GameModel size={boardSize}/>
         <Grid container justify='center' style={styles.game}>
           <GameBoard size={boardSize}/>
           <Record records={records}/>
