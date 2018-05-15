@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from  'react-redux';
-import { startGame, endGame } from '../actions/gameActions';
+import { startGame, endGame, updateGameRecord } from '../actions/gameActions';
 
 const mapStateToProps = (state) => {
   return {
     gameStarted: state.game.gameStarted,
     gameEnd: state.game.gameEnd,
+    currentTime: state.game.currentTime,
     blocks: state.game.blocks,
   }
 }
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   startGame: (size) => dispatch(startGame(size)),
   endGame: () => dispatch(endGame()),
+  updateGameRecord: (time) => dispatch(updateGameRecord(time)),
 });
 
 export class GameModel extends React.PureComponent {
@@ -37,13 +39,15 @@ export class GameModel extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    let { blocks, size, gameEnd, startGame } = nextProps;
+    let { blocks, size, gameEnd, currentTime, startGame, updateGameRecord } = nextProps;
     if (Object.keys(blocks).length !== 0)
       this.checkBlocks(blocks, size);
 
     // Reset game
-    if (gameEnd)
+    if (gameEnd) {
+      updateGameRecord(currentTime);
       startGame(size);
+    }
   }
 
   render() {

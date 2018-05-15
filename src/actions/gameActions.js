@@ -92,6 +92,13 @@ export function endGame() {
   }
 }
 
+export function updateGameRecord(time) {
+  return {
+    type: 'RECORD_ADD',
+    payload: time,
+  }
+}
+
 export function blockClick(value) {
   return {
     type: 'BLOCK_CLICK',

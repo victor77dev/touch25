@@ -1,6 +1,7 @@
 import React from 'react';
 import RecordTable from '../components/RecordTable';
 import Grid from '@material-ui/core/Grid';
+import { connect } from  'react-redux';
 
 const styles = {
   record: {
@@ -10,9 +11,18 @@ const styles = {
   },
 }
 
+const mapStateToProps = (state) => {
+  return {
+    records: state.game.records,
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+});
+
 const showRecords = 10;
 
-export default class Record extends React.PureComponent {
+export class Record extends React.PureComponent {
   render() {
     const { records } = this.props;
     const latestRecords = records.slice(-showRecords).reverse();
@@ -25,3 +35,5 @@ export default class Record extends React.PureComponent {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Record);

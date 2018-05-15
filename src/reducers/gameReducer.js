@@ -9,6 +9,7 @@ const initialState = {
   gameStarted: false,
   gameEnd: false,
   values: [],
+  records: [],
 };
 
 export default function reducer(state= initialState, action) {
@@ -73,7 +74,10 @@ export default function reducer(state= initialState, action) {
         blocks: {...state.blocks,
           [blockNo]: {...state.blocks[blockNo], clicked: true},
         }
-      }
+      };
+    }
+    case 'RECORD_ADD': {
+      return {...state, records: [...state.records, action.payload]};
     }
     default:
       // do nothing
