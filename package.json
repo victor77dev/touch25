@@ -1,8 +1,10 @@
 {
   "name": "touch25",
   "version": "0.1.0",
+  "homepage": "https://victor77dev.github.io/touch25",
   "private": true,
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "material-ui": "^1.0.0-beta.47",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -16,6 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
