@@ -92,6 +92,15 @@ export function endGame() {
   }
 }
 
+export function resetGame(size) {
+  return dispatch => {
+    dispatch(endCountDown())
+    endStopWatch();
+    dispatch({type: 'GAME_RESET'});
+    dispatch(startGame(size));
+  }
+}
+
 export function updateGameRecord(time) {
   return {
     type: 'RECORD_ADD',

@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { connect } from  'react-redux';
+import { resetGame } from '../actions/gameActions'
 
 const styles = {
   menuButton: {
@@ -19,6 +21,14 @@ const styles = {
   },
 };
 
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  resetGame: (size) => dispatch(resetGame(size)),
+});
 
 export class GameMenu extends React.PureComponent {
   state = {
@@ -35,7 +45,7 @@ export class GameMenu extends React.PureComponent {
 
   gameReset = () => {
     this.handleMenuClose();
-    console.log('game reset');
+    this.props.resetGame(this.props.size);
   };
 
   addButtons = (list) => {
@@ -77,4 +87,5 @@ GameMenu.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(GameMenu);
+const StyledGameMenu = withStyles(styles)(GameMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(StyledGameMenu);
