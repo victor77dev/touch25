@@ -13,6 +13,8 @@ const styles = theme => ({
     paddingBottom: 5,
     marginTop: theme.spacing.unit * 3,
     textAlign: 'center',
+    display: 'inline-block',
+    width: '50%',
   }),
 });
 

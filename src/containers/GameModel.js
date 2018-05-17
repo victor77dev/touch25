@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from  'react-redux';
-import { startGame, endGame, updateGameRecord } from '../actions/gameActions';
+import { startGame, endGame, updateGameRecord, updateNextClick } from '../actions/gameActions';
 
 const mapStateToProps = (state) => {
   return {
@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
     gameEnd: state.game.gameEnd,
     currentTime: state.game.currentTime,
     blocks: state.game.blocks,
+    nextClick: state.game.nextClick,
   }
 }
 
@@ -15,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   startGame: (size) => dispatch(startGame(size)),
   endGame: () => dispatch(endGame()),
   updateGameRecord: (time) => dispatch(updateGameRecord(time)),
+  updateNextClick: (number) => dispatch(updateNextClick(number)),
 });
 
 export class GameModel extends React.PureComponent {
@@ -24,14 +26,21 @@ export class GameModel extends React.PureComponent {
   }
 
   checkBlocks = (blocks, size) => {
-    let { endGame } = this.props;
-    let completed = true;
-    let nextCheck = 1;
-    while ((nextCheck < size * size) && (completed &= blocks[nextCheck]['completed']))
-      nextCheck++;
-    blocks[nextCheck]['completed'] = blocks[nextCheck]['clicked'];
-    if (blocks[size * size]['completed'])
+    let { endGame, updateNextClick, nextClick } = this.props;
+    for (let i = 1; i <= size * size; i++) {
+      if (i === nextClick && blocks[nextClick]['clicked']) {
+        blocks[nextClick]['completed'] = true;
+        nextClick++
+      }
+    }
+    if (blocks[size * size]['completed']) {
+      updateNextClick(1);
       endGame();
+    }
+    else if (blocks[nextClick]['completed']) {
+      nextClick++;
+      updateNextClick(nextClick);
+    }
 
     //Reset all clicks
     for (let i = 0; i < size * size; i++)

@@ -8,6 +8,7 @@ const initialState = {
   currentTime: 0,
   gameStarted: false,
   gameEnd: false,
+  nextClick: 1,
   values: [],
   records: [],
 };
@@ -75,6 +76,9 @@ export default function reducer(state= initialState, action) {
           [blockNo]: {...state.blocks[blockNo], clicked: true},
         }
       };
+    }
+    case 'CLICK_UPDATE': {
+      return {...state, nextClick: action.payload};
     }
     case 'RECORD_ADD': {
       return {...state, records: [...state.records, action.payload]};

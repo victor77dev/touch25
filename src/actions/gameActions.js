@@ -101,6 +101,13 @@ export function resetGame(size) {
   }
 }
 
+export function updateNextClick(number) {
+  return {
+    type: 'CLICK_UPDATE',
+    payload: number,
+  }
+}
+
 export function updateGameRecord(time) {
   return {
     type: 'RECORD_ADD',
