@@ -74,7 +74,7 @@ function randomValues(size) {
 export function startGame(size) {
   let blocks = {};
   for (let i = 0; i < size * size; i++) {
-    let blockInfo = {clicked: false, completed: false};
+    let blockInfo = {clicked: false, completed: false, incorrect: null};
     blocks[i + 1] = blockInfo;
   }
   let defaultValues = Array.from({length: size * size}, (v, k) => k + 1);;
@@ -105,6 +105,13 @@ export function updateNextClick(number) {
   return {
     type: 'CLICK_UPDATE',
     payload: number,
+  }
+}
+
+export function resetBlock(value) {
+  return {
+    type: 'BLOCK_RESET',
+    payload: value,
   }
 }
 

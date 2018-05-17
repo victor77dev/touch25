@@ -28,8 +28,11 @@ export class GameModel extends React.PureComponent {
   checkBlocks = (blocks, size) => {
     let { endGame, updateNextClick, nextClick } = this.props;
     for (let i = 1; i <= size * size; i++) {
+      if (i !== nextClick && blocks[i]['clicked'])
+        blocks[i]['incorrect'] = true;
       if (i === nextClick && blocks[nextClick]['clicked']) {
         blocks[nextClick]['completed'] = true;
+        blocks[nextClick]['incorrect'] = false;
         nextClick++
       }
     }

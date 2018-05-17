@@ -77,6 +77,14 @@ export default function reducer(state= initialState, action) {
         }
       };
     }
+    case 'BLOCK_RESET': {
+      let blockNo = action.payload;
+      return {...state,
+        blocks: {...state.blocks,
+          [blockNo]: {...state.blocks[blockNo], incorrect: null},
+        }
+      };
+    }
     case 'CLICK_UPDATE': {
       return {...state, nextClick: action.payload};
     }
