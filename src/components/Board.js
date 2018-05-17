@@ -8,11 +8,13 @@ import StartButton from './StartButton';
 const maxSize = 500;
 const minSize = 240;
 
-function genBoardStyle(size) {
+function genBoardStyle(size, blockSize) {
   const styles = {
     board: {
       maxWidth: maxSize + size,
       maxHeight: maxSize + size,
+      width: (blockSize + 1) * size,
+      height: (blockSize + 1) * size,
       minWidth: minSize,
       minHeight: minSize,
       position: 'relative',
@@ -47,7 +49,7 @@ export default class Board extends React.PureComponent {
     const { width, height } = this.state;
     const blockSize = Math.max(Math.min(width, height, maxSize), minSize) / size;
     return (
-      <Grid container justify='center' style={genBoardStyle(size).board}>
+      <Grid container justify='center' style={genBoardStyle(size, blockSize).board}>
         <StartButton />
         <GridList
           cols={size}
