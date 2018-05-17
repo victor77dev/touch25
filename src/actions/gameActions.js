@@ -128,3 +128,9 @@ export function blockClick(value) {
     payload: value,
   };
 }
+
+export function closeInstruction() {
+  return {
+    type: 'INTRO_CLOSE',
+  }
+}

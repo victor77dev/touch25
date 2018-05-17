@@ -8,6 +8,7 @@ const initialState = {
   currentTime: 0,
   gameStarted: false,
   gameEnd: false,
+  showIntro: true,
   nextClick: 1,
   values: [],
   records: [],
@@ -68,6 +69,9 @@ export default function reducer(state= initialState, action) {
     }
     case 'GAME_RESET': {
       return initialState;
+    }
+    case 'INTRO_CLOSE': {
+      return {...state, showIntro: false};
     }
     case 'BLOCK_CLICK': {
       let blockNo = action.payload;

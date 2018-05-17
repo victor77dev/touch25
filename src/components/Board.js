@@ -4,6 +4,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Grid from '@material-ui/core/Grid';
 import Block from './Block';
 import StartButton from './StartButton';
+import Instruction from './Instruction';
 
 const maxSize = 500;
 const minSize = 240;
@@ -50,6 +51,7 @@ export default class Board extends React.PureComponent {
     const blockSize = Math.max(Math.min(width, height, maxSize), minSize) / size;
     return (
       <Grid container justify='center' style={genBoardStyle(size, blockSize).board}>
+        <Instruction size={size}/>
         <StartButton />
         <GridList
           cols={size}
